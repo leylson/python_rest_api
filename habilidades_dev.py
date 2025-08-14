@@ -1,4 +1,4 @@
-#Desenvolvendo uma REST API com a exntesão FLASK_RESTFUL
+#Desenvolvendo uma REST API com a extensão FLASK_RESTFUL
 from flask import Flask, jsonify, request
 import json
 app = Flask(__name__)
@@ -12,12 +12,10 @@ desenvolvedores = [
          'habilidades':['Python', 'Django']
          }
 ]
+
 @app.route('/dev/<int:id>/', methods=['GET', 'PUT', 'DELETE'])
 def desenvolverdor(id):
     if request.method == 'GET':
-        #     desenvolverdor = desenvoldores[id]
-        #     print(desenvolverdor)
-        #     return jsonify(desenvolverdor)
         try:
             response = desenvolvedores[id]
         except IndexError:
@@ -38,17 +36,13 @@ def desenvolverdor(id):
 @app.route('/dev/', methods=['POST', 'GET'])
 def list_desenvolvedores():
     if request.method == 'POST':
-        #dados = request.get_json(force=True)  # força leitura como JSON
         dados = json.loads(request.data)
         posicao = len(desenvolvedores)
         dados['id'] = posicao
         desenvolvedores.append(dados)
         return jsonify(desenvolvedores[posicao])
-        #jsonify({'status':'sucesso', 'mensagem': 'teste'})
     elif request.method == 'GET':
         return jsonify(desenvolvedores)
-
-
 
 if __name__ == '__main__':
     app.run()
