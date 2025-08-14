@@ -1,4 +1,4 @@
-#Desenvolvendo uma REST API com a extensão FLASK_RESTFUL
+#Desenvolvendo uma REST API 
 from flask import Flask, jsonify, request
 import json
 app = Flask(__name__)
